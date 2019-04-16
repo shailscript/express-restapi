@@ -19,3 +19,5 @@ classesRoutes.put('/:id', (req, resp) => {
 classesRoutes.delete('/:id', (req, resp) => {
     return resp.send("Received a DELETE request for a specified classes item");
 });
+
+export default classesRoutes
