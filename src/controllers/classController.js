@@ -25,6 +25,42 @@ export default {
             next(error);
         }
     },
+
+    /**
+     * Valid request structure
+     * {
+            "code": "TEST",
+            "name": "Testing",
+            "teacherId": 1,
+            "startDate": "XXX 00",
+            "endDate": "YYY 00"
+        }
+
+        NOTE that the teacherId is expected to be a number, or the request would be considered invalid.
+     */
+
+    create: async (req, res, next) => {
+        try {
+            if (Object.keys(req.body).length === 0 || req.body.name === '' || req.body.code === '' || !typeof(req.body.teacherId) === 'number') {
+                console.log( typeof(req.body.teacherId) === 'number');
+                res.status(404).send({
+                    error: 'Invalid request.'
+                  })
+            } else {
+                const newClass = {
+                    ...req.body
+                };
+                const createdClassId = await classModel.create(newClass, next);
+                const created = await classModel.findById(await createdClassId, next);
+                return res.status(200).send({
+                    class: created
+                })
+            }
+        } catch (error) {
+            next(error);
+        }
+    },
+
         res.status(200).json( {
             classes
         })
