@@ -4,6 +4,7 @@ import morgan from 'morgan';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import routes from './routes'
+const initializeDb = require('./db').initializeDb
 
 const app = express();
 
@@ -17,6 +18,11 @@ app.use(cors());
 
 app.use('/api', routes);
 
-app.listen(process.env.PORT, () => {
-  console.log(`server listening on port ${process.env.PORT}`);
-});
+initializeDb(err => {
+  app.listen(process.env.PORT, err => {
+    if (err) {
+      throw err
+    }
+    console.log(`server is listening on port ${process.env.PORT}`)
+  })
+})
