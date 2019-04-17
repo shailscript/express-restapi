@@ -1,8 +1,7 @@
+import classController from '../../controllers/classController'
 const classesRoutes = require('express').Router()
 
-classesRoutes.get('/', (req, resp) => {
-    return resp.send("Received a GET request for classes");
-});
+classesRoutes.get('/', classController.list);
 
 classesRoutes.get('/:id', (req, resp) => {
     return resp.send("Received a GET request for a specified classes item");
