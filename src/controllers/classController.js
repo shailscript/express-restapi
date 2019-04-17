@@ -61,16 +61,16 @@ export default {
         }
     },
 
+    update: async (req, res) => {
         res.status(200).json( {
-            classes
+            value: "working"
         })
     },
-    
-    show: async (req, res) => {
-        const resultClass = await classModel.findById(req.params.id);
+
+    delete: async (req, res) => {
         res.status(200).json( {
-            resultClass
+            value: "working"
         })
-    },
     }
+
 }
