@@ -3,20 +3,12 @@ const classesRoutes = require('express').Router()
 
 classesRoutes.get('/', classController.list);
 
-classesRoutes.get('/:id', (req, resp) => {
-    return resp.send("Received a GET request for a specified classes item");
-});
+classesRoutes.get('/:id', classController.show);
 
-classesRoutes.post('/', (req, resp) => {
-    return resp.send("Received a POST request to classes");
-});
+classesRoutes.post('/', classController.create);
 
-classesRoutes.put('/:id', (req, resp) => {
-    return resp.send("Received a PUT request for a specified classes item");
-});
+classesRoutes.put('/:id', classController.update);
 
-classesRoutes.delete('/:id', (req, resp) => {
-    return resp.send("Received a DELETE request for a specified classes item");
-});
+classesRoutes.delete('/:id', classController.delete);
 
 export default classesRoutes
