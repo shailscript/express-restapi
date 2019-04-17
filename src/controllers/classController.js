@@ -6,5 +6,13 @@ export default {
         res.status(200).json( {
             classes
         })
+    },
+    
+    show: async (req, res) => {
+        const resultClass = await classModel.findById(req.params.id);
+        res.status(200).json( {
+            resultClass
+        })
+    },
     }
 }
