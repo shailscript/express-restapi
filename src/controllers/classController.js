@@ -36,7 +36,7 @@ export default {
             "endDate": "YYY 00"
         }
 
-        NOTE that the teacherId is expected to be a number, or the request would be considered invalid. Response code would be 400 (BAD REQUEST)
+        NOTE that the teacherId is expected to be a number, or the request would be considered invalid. Response code would be 406 (BAD REQUEST)
      */
 
     create: async (req, res, next) => {
