@@ -95,7 +95,7 @@ export default {
                     } else {
                         return res.status(500).send({
                             error: 'Internal server error. Sorry we messed up something :('
-        })
+                        })
                     }
                     
                 }
@@ -105,10 +105,29 @@ export default {
         }
     },
 
-    delete: async (req, res) => {
-        res.status(200).json( {
-            value: "working"
-        })
+    delete: async (req, res, next) => {
+        try {
+            const id = req.params.id;
+            const requestedClass = await classModel.findById(id, next);
+            if( await requestedClass.length === 0){
+                return res.status(404).send({
+                    error: 'Resource not found. Nothing to delete.'
+                })
+            } else {
+                const deletedClassResponse = await classModel.delete(id, next);
+                if (deletedClassResponse !== undefined || deletedClassResponse !== null) {
+                    return res.status(200).send({
+                        id: id
+                    })
+                } else {
+                    res.status(500).send({
+                        error: 'Internal server error. Sorry we messed up something :('
+                    })
+                }
+            }
+        } catch (error) {
+            next(error);
+        }
     }
 
 }

@@ -58,5 +58,15 @@ export default {
         } catch (error) {
             next(error)
         }
+    },
+
+    delete: async (id, next) => {
+        try {
+            const db = getDb();
+            const result = await db.run(`DELETE from Classes WHERE id = ${id}`);
+            return await result;
+        } catch (error) {
+            next(error);
+        }
     }
 }
