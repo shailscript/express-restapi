@@ -99,8 +99,8 @@ Request structure to enroll a Student in a Class
 
 
 ## See Also
--- Architectural constraints for Representational State Trasnfer at [Wikipedia](https://en.wikipedia.org/wiki/Representational_state_transfer#Architectural_constraints).
--- List of Hypertext Transfer Protocol (HTTP) response status codes at [Wikipedia](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes).
+* Architectural constraints for Representational State Trasnfer at [Wikipedia](https://en.wikipedia.org/wiki/Representational_state_transfer#Architectural_constraints).
+* List of Hypertext Transfer Protocol (HTTP) response status codes at [Wikipedia](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes).
 
 
 ## Author
