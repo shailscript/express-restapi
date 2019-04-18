@@ -1,16 +1,12 @@
 # REST APIs using ExpressJS
-___
 > A backend web application to implement Representational State Transfer(REST) APIs for some resources.
 
 
 ## Description
-___
 The objective for the this project is to create a REST api that allows the users of the api to interact with a SQL database of classes, teachers, and students. There is **NO authentication implemented** for this api. The api uses NodeJS, Express, and SQLite.
 
 
 ## Getting started
-___
-### Installation
 > Clone the repository or Download and extract the contents of the repository folder
 
 #### Install dependencies using npm
@@ -36,7 +32,6 @@ npm start
 
 
 ## Features
-___
 This app uses the migrations utility of the sqlite library.
 The express endpoint should have the following routes.
 ```
@@ -66,7 +61,6 @@ The express endpoint should have the following routes.
 ```
 
 ## Examples
-___
 Where applicable, the body in all requests should be x-www-form-urlencoded, for postman, or -H "Content-Type: application/json" for curl.
 
 Request structure for a Class
@@ -105,9 +99,8 @@ Request structure to enroll a Student in a Class
 
 
 ## See Also
-___
-Architectural constraints for Representational State Trasnfer at [Wikipedia](https://en.wikipedia.org/wiki/Representational_state_transfer#Architectural_constraints).
-List of Hypertext Transfer Protocol (HTTP) response status codes at [Wikipedia](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes).
+-- Architectural constraints for Representational State Trasnfer at [Wikipedia](https://en.wikipedia.org/wiki/Representational_state_transfer#Architectural_constraints).
+-- List of Hypertext Transfer Protocol (HTTP) response status codes at [Wikipedia](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes).
 
 
 ## Author
