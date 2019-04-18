@@ -31,5 +31,24 @@ export default {
         } catch (error) {
             next(error);
         }
+    },
+
+    update: async (data, next) => {
+        try {
+            const db = getDb();
+
+            const result  = await db.run(`UPDATE Classes 
+                                            SET code = "${data.code}", 
+                                            className = "${data.className}", 
+                                            teacherId = ${data.teacherId} , 
+                                            startDate = "${data.startDate}", 
+                                            endDate = "${data.endDate}" 
+                                            WHERE id = '${data.id}'`
+                                        );
+            return result.changes;
+            //Since, the response of a SQL UPDATE statement has changes recorded in 'changes' key
+        } catch (error) {
+            next(error)
+        }
     }
 }

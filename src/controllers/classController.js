@@ -61,10 +61,48 @@ export default {
         }
     },
 
-    update: async (req, res) => {
-        res.status(200).json( {
-            value: "working"
+    update: async (req, res, next) => {
+        try {
+            if (Object.keys(req.body).length === 0) {
+                res.status(411).send({
+                    error: 'Length Required. Invalid request. Nothing to update.'
+                });
+            } else {
+                const id = req.params.id;
+                const requestedClass = await classModel.findById(id, next);
+                if( await requestedClass.length === 0){
+                    return res.status(404).send({
+                        error: 'Resource not found. Nothing to update.'
+                    })
+                } else {
+                    const data = {
+                        ...req.body
+                    };
+
+                    console.log(JSON.stringify(data));
+                    for (const key in data) {
+                        if (data.hasOwnProperty(key)) {
+                            requestedClass[0][key] = data[key];
+                        }
+                    }
+                    
+                    const updatedClass = await classModel.update(requestedClass[0], next);
+                    if(await updatedClass) {
+                        const updated = await classModel.findById(id, next);
+                        return res.status(200).send({
+                            class: updated
+                        })
+                    } else {
+                        return res.status(500).send({
+                            error: 'Internal server error. Sorry we messed up something :('
         })
+                    }
+                    
+                }
+            }
+        } catch (error) {
+            next(error);
+        }
     },
 
     delete: async (req, res) => {
