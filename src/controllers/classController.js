@@ -43,8 +43,8 @@ export default {
         try {
             if (Object.keys(req.body).length === 0 || req.body.name === '' || req.body.code === '' || !typeof(req.body.teacherId) === 'number') {
                 console.log( typeof(req.body.teacherId) === 'number');
-                res.status(404).send({
-                    error: 'Invalid request.'
+                res.status(406).send({
+                    error: 'Not Acceptable. Invalid request.'
                   })
             } else {
                 const newClass = {
@@ -52,7 +52,7 @@ export default {
                 };
                 const createdClassId = await classModel.create(newClass, next);
                 const created = await classModel.findById(await createdClassId, next);
-                return res.status(200).send({
+                return res.status(201).send({
                     class: created
                 })
             }
