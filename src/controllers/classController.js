@@ -1,4 +1,5 @@
 import classModel from '../models/class'
+import studentModel from '../models/student'
 
 export default {
     list: async (req, res, next) => {
@@ -118,6 +119,73 @@ export default {
                 if (deletedClassResponse !== undefined || deletedClassResponse !== null) {
                     return res.status(200).send({
                         id: id
+                    })
+                } else {
+                    res.status(500).send({
+                        error: 'Internal server error. Sorry we messed up something :('
+                    })
+                }
+            }
+        } catch (error) {
+            next(error);
+        }
+    },
+
+    showEnrollments: async (req, res, next) => {
+        try {
+            const classId = req.params.id * 1; //Shorthand to convert into number
+            const enrollments = await classModel.findAllEnrollments(classId, next);
+            if (enrollments !== undefined) {
+                return res.status(200).send(enrollments);
+            } else {
+                return res.status(404).end()
+            }
+        } catch (error) {
+            next(error);
+        }
+    },
+
+    createEnrollment: async(req, res, next) => {
+        try {
+            const classId = req.params.id;
+            const studentId = req.body.student_id*1;
+            console.log(classId, studentId)
+            const student = await studentModel.findById(studentId, next);
+            if (student !== undefined) {
+                const check = await classModel.checkEnrollment(studentId, classId, next);
+                if (check.length === 0) {
+                    const created = await classModel.createNewEnrollment(studentId, classId, next);
+                    return res.status(200).send({
+                        created : created
+                    });
+                } else {
+                    return res.status(409).send({
+                        error: "Conflict. Resource already exists."
+                    });
+                }
+            } else {
+                return res.status(404).end()
+            }
+        } catch (error) {
+            next(error);
+        }
+
+    },
+
+    deleteEnrollment: async (req, res, next) => {
+        try {
+            const classId = req.params.classId;
+            const studentId = req.params.studentId;
+            const check = await classModel.checkEnrollment(studentId, classId, next);
+            if(check.length === 0){
+                return res.status(404).send({
+                    error: 'Resource not found. Nothing to delete.'
+                })
+            } else {
+                const deletedEnrollmentResponse = await classModel.deleteEnrollment(studentId, classId, next);
+                if (deletedEnrollmentResponse !== undefined || deletedEnrollmentResponse !== null) {
+                    return res.status(200).send({
+                        message: 'Deleted Successfully'
                     })
                 } else {
                     res.status(500).send({

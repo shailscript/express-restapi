@@ -68,5 +68,58 @@ export default {
         } catch (error) {
             next(error);
         }
-    }
+    },
+
+    findAllEnrollments: async(id, next) => {
+        try {
+            const db= getDb();
+            const result = await db.all(`SELECT studentId AS id, firstName, lastName FROM Students 
+                                            JOIN Student_classes 
+                                            ON Students.id = Student_classes.studentId 
+                                            WHERE classId = ${id}`);
+            return await result;
+        } catch (error) {
+            next(error);
+        }
+    },
+
+    checkEnrollment: async (studentId, classId, next) => {
+        try {
+            const db = getDb();
+            const result = await db.all(`SELECT * FROM Student_classes 
+                                                WHERE studentId = ${studentId}
+                                                AND classId = ${classId}`
+                                            );
+                                            console.log(JSON.stringify(result));
+            return result;
+        } catch (error) {
+            next(error);
+        }
+    },
+
+    createNewEnrollment: async (studentId, classId, next) => {
+        try {
+            const db = getDb();
+            const result = await db.run(`INSERT INTO Student_classes 
+                                                (studentId, classId) 
+                                                VALUES (${studentId}, ${classId})`
+                                            );
+            return result.lastID; 
+            //Since, the response of a SQL INSERT statement has last inserted id as 'lastID' key
+        } catch (error) {
+            next(error);
+        }
+    },
+
+    deleteEnrollment: async (studentId, classId, next) => {
+        try {
+            const db = getDb();
+            const result = await db.run(`DELETE FROM Student_classes 
+                                            WHERE studentId = ${studentId}
+                                            AND classId = ${classId}`);
+            return await result;
+        } catch (error) {
+            next(error);
+        }
+    },
 }
