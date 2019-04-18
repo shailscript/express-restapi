@@ -19,10 +19,10 @@ app.use(cors());
 app.use('/api', routes);
 
 initializeDb(err => {
-  app.listen(process.env.PORT, err => {
+  app.listen(process.env.PORT || 3000, err => {
     if (err) {
       throw err
     }
-    console.log(`server is listening on port ${process.env.PORT}`)
+    console.log(`server is listening on port ${process.env.PORT || 3000}`)
   })
 })
