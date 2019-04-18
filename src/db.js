@@ -30,6 +30,6 @@ export const initializeDb = cb => {
 }
 
 export const getDb = () => {
-    assert.ok(_db, 'Db has not been initialized. call initDB first')
+    assert.ok(_db, 'DB has not been initialized.')
     return _db
 }
