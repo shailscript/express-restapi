@@ -30,18 +30,18 @@ export default {
      * Valid request structure
      * {
             "code": "TEST",
-            "name": "Testing",
+            "className": "Testing",
             "teacherId": 1,
             "startDate": "XXX 00",
             "endDate": "YYY 00"
         }
 
-        NOTE that the teacherId is expected to be a number, or the request would be considered invalid.
+        NOTE that the teacherId is expected to be a number, or the request would be considered invalid. Response code would be 400 (BAD REQUEST)
      */
 
     create: async (req, res, next) => {
         try {
-            if (Object.keys(req.body).length === 0 || req.body.name === '' || req.body.code === '' || !typeof(req.body.teacherId) === 'number') {
+            if (Object.keys(req.body).length === 0 || req.body.className === '' || req.body.code === '' || !typeof(req.body.teacherId) === 'number') {
                 console.log( typeof(req.body.teacherId) === 'number');
                 res.status(406).send({
                     error: 'Not Acceptable. Invalid request.'

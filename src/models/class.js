@@ -25,9 +25,17 @@ export default {
     create: async (newClass, next) => {
         try {
             const db = getDb();
-            const resultClass = await db.run(`INSERT INTO Classes (code, className, teacherId, startDate, endDate) VALUES ("${newClass.code}", "${newClass.name}", ${newClass.teacherId}, "${newClass.startDate}", "${newClass.endDate}")`);
+            const resultClass = await db.run(`INSERT INTO Classes 
+                                                (code, className, teacherId, startDate, endDate) 
+                                                VALUES ("${newClass.code}", 
+                                                        "${newClass.className}", 
+                                                        ${newClass.teacherId}, 
+                                                        "${newClass.startDate}", 
+                                                        "${newClass.endDate}"
+                                                        )`
+                                            );
             return resultClass.lastID; 
-            //Since, the response of a SQL INSERT statement has last inserted id as lastID
+            //Since, the response of a SQL INSERT statement has last inserted id as 'lastID' key
         } catch (error) {
             next(error);
         }
