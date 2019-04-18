@@ -15,7 +15,7 @@ export default {
     findById: async (id, next) => {
         try {
             const db = getDb();
-            const resultClass = await db.all(`SELECT * FROM Classes WHERE id = ${id}`);
+            const resultClass = await db.all(` SELECT Classes.*, Teachers.firstName AS TeacherFirstname, Teachers.lastName AS TeacherLastname FROM Classes INNER JOIN Teachers ON Classes.teacherId = Teachers.id WHERE Classes.id = ${id};`);
             return resultClass;
         } catch (error) {
             next(error);
