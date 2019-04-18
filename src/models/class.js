@@ -90,7 +90,6 @@ export default {
                                                 WHERE studentId = ${studentId}
                                                 AND classId = ${classId}`
                                             );
-                                            console.log(JSON.stringify(result));
             return result;
         } catch (error) {
             next(error);

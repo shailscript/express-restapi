@@ -43,7 +43,6 @@ export default {
     create: async (req, res, next) => {
         try {
             if (Object.keys(req.body).length === 0 || req.body.className === '' || req.body.code === '' || !typeof(req.body.teacherId) === 'number') {
-                console.log( typeof(req.body.teacherId) === 'number');
                 res.status(406).send({
                     error: 'Not Acceptable. Invalid request.'
                   })
@@ -80,7 +79,6 @@ export default {
                         ...req.body
                     };
 
-                    console.log(JSON.stringify(data));
                     for (const key in data) {
                         if (data.hasOwnProperty(key)) {
                             requestedClass[0][key] = data[key];
@@ -149,7 +147,6 @@ export default {
         try {
             const classId = req.params.id;
             const studentId = req.body.student_id*1;
-            console.log(classId, studentId)
             const student = await studentModel.findById(studentId, next);
             if (student !== undefined) {
                 const check = await classModel.checkEnrollment(studentId, classId, next);
