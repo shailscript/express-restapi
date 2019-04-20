@@ -1,0 +1,43 @@
+{
+    "models": {
+        "students": [
+            {
+                "name": "id",
+                "type": "Number",
+                "required": true
+            },
+    
+            {
+                "name": "firstName",
+                "type": "String",
+                "required": false
+            },
+
+            {
+                "name": "lastName",
+                "type": "String",
+                "required": false
+            }
+        ],
+
+        "teachers" : [
+            {
+                "name": "id",
+                "type": "Number",
+                "required": true
+            },
+    
+            {
+                "name": "firstName",
+                "type": "String",
+                "required": false
+            },
+
+            {
+                "name": "lastName",
+                "type": "String",
+                "required": false
+            }
+        ]
+    }  
+}
