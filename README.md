@@ -3,23 +3,21 @@
 
 
 ## Description
-The objective for the this project is to create a REST api that allows the users of the api to interact with a SQL database of classes, teachers, and students. There is **NO authentication implemented** for this api. The api uses NodeJS, Express, and SQLite.
+The objective for the this project is to create RESTful APIs that allows an application to interact with a SQL database of classes, teachers, and students. There is **NO authentication implemented** for this api. The api uses NodeJS, Express, and SQLite.
 
 
 ## Getting started
-> Clone the repository or Download and extract the contents of the repository folder
-
-#### Install dependencies using npm
+> Clone or download the repository and then run the following command to install all dependencies
 ```bash
 npm install
 ```
 
 #### Setting up .env file
-Next make sure to create a new .env file and assign PORT for teh application to your .env file:
+Next make sure you create a new .env file and assign PORT for the application to your .env file:
 ```
 PORT = 3000
 ```
-You can do that using the following command on Linux, Mac or Windows PowerShell
+To create a .env file, in the project folder run the following command on Linux, Mac or Windows PowerShell
 ```bash
 cp .env.example .env
 ```
